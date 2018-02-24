@@ -9,8 +9,8 @@ namespace SimpleBot
     {
         public static string Reply(Message message)
         {
-            
-            return $"{message.User} disse '{message.Text}'";
+            var visitNumber = Repository.PerfilMongoRepository.Instance.InsertVisit(message.Id);
+            return $"{message.User} enviou {visitNumber} mensagens!";
         }
     }
 }

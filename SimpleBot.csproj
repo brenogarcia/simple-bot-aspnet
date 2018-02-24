@@ -137,14 +137,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IMessageRepository.cs" />
+    <Compile Include="Interface\IProfileRepository.cs" />
     <Compile Include="Logic\Message.cs" />
     <Compile Include="Logic\SimpleBotUser.cs" />
     <Compile Include="Logic\UserProfile.cs" />
-    <Compile Include="OM\MessageOM.cs" />
-    <Compile Include="OM\ProfileOM.cs" />
+    <Compile Include="Entity\MessageEntity.cs" />
+    <Compile Include="Entity\ProfileEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\MessageRepository.cs" />
-    <Compile Include="Repository\PerfilRepository.cs" />
+    <Compile Include="Repository\MessageMongoRepository.cs" />
+    <Compile Include="Repository\PerfilMongoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

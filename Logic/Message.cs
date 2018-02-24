@@ -19,12 +19,12 @@ namespace SimpleBot
             this.User = username;
             this.Text = text;
 
-            var message = new MessageOM();
-            message.Id = id;
-            message.User = username;
+            var message = new MessageEntity();
+            message.IdUser = id;
+            message.UserName = username;
             message.Message = text;
 
-            Repository.MessageRepository.Instance.InsertMessage(message);
+            Repository.MessageMongoRepository.Instance.InsertMessage(message);
         }
     }
 }

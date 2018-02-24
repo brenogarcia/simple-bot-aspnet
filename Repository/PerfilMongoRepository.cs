@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using SimpleBot.Interface;
 using SimpleBot.OM;
 using System;
 using System.Collections.Generic;
@@ -8,34 +10,34 @@ using System.Web;
 
 namespace SimpleBot.Repository
 {
-    public class PerfilRepository
+    public sealed class PerfilMongoRepository : IProfileRepository
     {
-        private static readonly Lazy<PerfilRepository> lazy =
-    new Lazy<PerfilRepository>(() => new PerfilRepository());
+        private static readonly Lazy<PerfilMongoRepository> lazy =
+    new Lazy<PerfilMongoRepository>(() => new PerfilMongoRepository());
 
-        public static PerfilRepository Instance { get { return lazy.Value; } }
+        public static PerfilMongoRepository Instance { get { return lazy.Value; } }
 
-        IMongoCollection<ProfileOM> col;
+        IMongoCollection<ProfileEntity> col;
         IMongoDatabase db;
         MongoClient cliente;
 
-        private PerfilRepository()
+        private PerfilMongoRepository()
         {
             cliente = new MongoClient();
             db = cliente.GetDatabase("Chatbot");
-            col = db.GetCollection<ProfileOM>("Perfil");
+            col = db.GetCollection<ProfileEntity>("Perfil");
         }
 
-        public long InsertVisit(string id)
+        public long InsertVisit(string idProfile)
         {
-            var filtro = Builders<ProfileOM>.Filter.Eq("IdUser", id);
+            var filtro = Builders<ProfileEntity>.Filter.Eq("IdProfile", idProfile);
             var profile = col.Find(filtro).FirstOrDefault();
 
             if (profile == null)
             {
-                profile = new ProfileOM()
+                profile = new ProfileEntity()
                 {
-                    Id = id,
+                    IdProfile = idProfile,
                     VisitNumber = 0
                 };
             }
